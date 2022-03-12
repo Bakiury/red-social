@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Post } from "src/posts/entities/post.entity";
+import { MyPost } from "src/posts/entities/post.entity";
 import { Comment } from "src/comments/entities/comment.entity";
 
 @Entity()
@@ -34,8 +34,8 @@ export class User {
     @UpdateDateColumn({type: "timestamp", name: "updated_at", default: () => "CURRENT_TIMESTAMP"})
     updated_at: Date;
 
-    @OneToMany(type => Post, post => post.pos_use_id)
-    post: Post[];
+    @OneToMany(type => MyPost, myPost => myPost.pos_use_id)
+    myPost: MyPost[];
 
     @OneToMany(type => Comment, comment => comment.com_use_id)
     comment: Comment[];

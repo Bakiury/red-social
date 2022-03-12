@@ -11,7 +11,7 @@ export class UsersService {
   
     getAll(): Promise<User[]> {
       return this.usersRepository.find({
-        relations: ['post']
+        relations: ['myPost']
       }); // SELECT * FROM user JOIN post
     }
   
