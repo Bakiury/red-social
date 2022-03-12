@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Post } from "src/posts/entities/post.entity";
+import { Comment } from "src/comments/entities/comment.entity";
 
 @Entity()
 export class User {
@@ -23,9 +25,18 @@ export class User {
     @Column({type: "date"})
     use_birthday: Date;
 
+    @Column({type: "varchar", length: 256})
+    use_description: string;
+
     @CreateDateColumn({type: "timestamp", name: "created_at", default: () => "CURRENT_TIMESTAMP"})
     created_at: Date;
 
     @UpdateDateColumn({type: "timestamp", name: "updated_at", default: () => "CURRENT_TIMESTAMP"})
     updated_at: Date;
+
+    @OneToMany(type => Post, post => post.pos_use_id)
+    post: Post[];
+
+    @OneToMany(type => Comment, comment => comment.com_use_id)
+    comment: Comment[];
 }
