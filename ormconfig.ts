@@ -7,9 +7,9 @@ const config: MysqlConnectionOptions = {
     username: 'root',
     password: '',
     database: 'red_social',
-    entities: ['dist/src/**/*.entity{.ts,.js}'],
+    entities: ['dist/src/**/*.entity.js'],
     synchronize: false,
-    migrations: ['dist/src/red_social/migrations/*{.ts,.js}'],
+    migrations: ['dist/src/red_social/migrations/*.js'],
     cli: {
         migrationsDir: 'src/red_social/migrations'
     }
