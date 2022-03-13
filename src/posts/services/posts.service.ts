@@ -9,8 +9,8 @@ export class PostsService {
 
     }
   
-    getAll(): Promise<MyPost[]> {
-      return this.postsRepository.find({
+    async getAll(): Promise<MyPost[]> {
+      return await this.postsRepository.find({
         relations: ['pos_use_id', 'comment']
       }); // SELECT * FROM my_post JOIN user
     }
@@ -18,6 +18,7 @@ export class PostsService {
     async getOneById(id: number): Promise<MyPost> {
       try {
         const postID = await this.postsRepository.findOneOrFail(id); // SELECT * FROM my_post WHERE pos_id = id;
+
         return postID;
       } catch (error) {
         // handle error
@@ -25,10 +26,10 @@ export class PostsService {
       }
     }
   
-    createPost(data: object): Promise<MyPost> {
-      const newPost = this.postsRepository.create(data); // const newPost = new MyPost(); newPost.name = name;
+    async createPost(data: object): Promise<MyPost> {
+      const newPost = await this.postsRepository.create(data); // const newPost = new MyPost(); newPost.name = name;
   
-      return this.postsRepository.save(newPost); // INSERT
+      return await this.postsRepository.save(newPost); // INSERT
     }
   
     async updatePost(id: number, data: object): Promise<MyPost> {
@@ -36,7 +37,7 @@ export class PostsService {
         const postID = await this.postsRepository.findOneOrFail(id);
         this.postsRepository.merge(postID, data);
   
-        return this.postsRepository.save(postID); // UPDATE
+        return await this.postsRepository.save(postID); // UPDATE
       } catch (error) {
         // handle error
         throw error;
@@ -47,14 +48,14 @@ export class PostsService {
       try {
         const postID = await this.postsRepository.findOneOrFail(id);
   
-        return this.postsRepository.remove(postID); // DELETE
+        return await this.postsRepository.remove(postID); // DELETE
       } catch (error) {
         // handle error
         throw error;
       }
     }
   
-    customQueryTest(): any {
-      return this.postsRepository.createQueryBuilder("my_post").select("pos_description").where("pos_id = :id", { id: 1}).getOne();
+    async customQueryTest(): Promise<any> {
+      return await this.postsRepository.createQueryBuilder("my_post").select("pos_description").where("pos_id = :id", { id: 1}).getOne();
     }
 }

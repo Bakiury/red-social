@@ -36,18 +36,17 @@ export class UsersController {
     }
 
     @Get('auth_user')
-    async user(@Req() request: Request) {
+    async user(@Req() request: Request): Promise<any> {
         try {
             const cookie = request.cookies['jwt']; // Request a cookie
-
             const data = await this.jwtService.verifyAsync(cookie); // When the cookie is retrieved and still valid is going to return the user data (use_id and cookie's informations)
 
             if (!data) {
                 throw new UnauthorizedException();
             }
-
+            
             // To return user's information according to their valid and unexpired cookie
-            const user = await this.usersService.findOne({use_id: data['id']});
+            const user = await this.usersService.findOne({use_id: data.id});
 
             // Remove the user's password
             const {use_password, ...result} = user;
@@ -59,7 +58,7 @@ export class UsersController {
     }
 
     @Post('logout')
-    async logout(@Res({passthrough: true}) response: Response) {
+    async logout(@Res({passthrough: true}) response: Response): Promise<any> {
         response.clearCookie('jwt');
 
         return {
@@ -68,13 +67,35 @@ export class UsersController {
     }
     
     @Get('all')
-    getAll(): Promise<User[]> {
-        return this.usersService.getAll();
+    async getAll(@Req() request: Request): Promise<User[]> {
+        try {
+            const cookie = request.cookies['jwt'];
+            const data = await this.jwtService.verifyAsync(cookie);
+    
+            if (!data) {
+                throw new UnauthorizedException();
+            }
+
+            return await this.usersService.getAll();
+        } catch (error) {
+            throw new UnauthorizedException();
+        }
     }
 
     @Get(':id')
-    getOne(@Param('id') id: number): Promise<User> {
-        return this.usersService.getOneById(id);
+    async getOne(@Req() request: Request, @Param('id') id: number): Promise<User> {
+        try {
+            const cookie = request.cookies['jwt'];
+            const data = await this.jwtService.verifyAsync(cookie);
+    
+            if (!data) {
+                throw new UnauthorizedException();
+            }
+
+            return await this.usersService.getOneById(id);
+        } catch (error) {
+            throw new UnauthorizedException();
+        }
     }
 
     @Post()
@@ -106,12 +127,34 @@ export class UsersController {
     }
 
     @Patch(':id')
-    update(@Param('id') id: number, @Body() body: object): Promise<User> {
-        return this.usersService.updateUser(id, body);
+    async update(@Req() request: Request, @Param('id') id: number, @Body() body: object): Promise<User> {
+        try {
+            const cookie = request.cookies['jwt'];
+            const data = await this.jwtService.verifyAsync(cookie);
+    
+            if (!data) {
+                throw new UnauthorizedException();
+            }
+
+            return await this.usersService.updateUser(id, body);
+        } catch (error) {
+            throw new UnauthorizedException();
+        }
     }
 
     @Delete(':id')
-    delete(@Param('id') id: number): Promise<User> {
-        return this.usersService.deleteUser(id);
+    async delete(@Req() request: Request, @Param('id') id: number): Promise<User> {
+        try {
+            const cookie = request.cookies['jwt'];
+            const data = await this.jwtService.verifyAsync(cookie);
+    
+            if (!data) {
+                throw new UnauthorizedException();
+            }
+
+            return await this.usersService.deleteUser(id);
+        } catch (error) {
+            throw new UnauthorizedException();
+        }
     }
 }

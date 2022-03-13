@@ -9,8 +9,8 @@ export class CommentsService {
 
     }
   
-    getAll(): Promise<Comment[]> {
-      return this.commentsRepository.find({
+    async getAll(): Promise<Comment[]> {
+      return await this.commentsRepository.find({
         relations: ['com_use_id', 'com_pos_id']
       }); // SELECT * FROM comment JOIN user, JOIN my_post
     }
@@ -18,6 +18,7 @@ export class CommentsService {
     async getOneById(id: number): Promise<Comment> {
       try {
         const commentID = await this.commentsRepository.findOneOrFail(id); // SELECT * FROM comment WHERE com_id = id;
+        
         return commentID;
       } catch (error) {
         // handle error
@@ -25,10 +26,10 @@ export class CommentsService {
       }
     }
   
-    createComment(data: object): Promise<Comment> {
-      const newcomment = this.commentsRepository.create(data); // const newcomment = new comment(); newcomment.name = name;
+    async createComment(data: object): Promise<Comment> {
+      const newcomment = await this.commentsRepository.create(data); // const newcomment = new comment(); newcomment.name = name;
   
-      return this.commentsRepository.save(newcomment); // INSERT
+      return await this.commentsRepository.save(newcomment); // INSERT
     }
   
     async updateComment(id: number, data: object): Promise<Comment> {
@@ -36,7 +37,7 @@ export class CommentsService {
         const commentID = await this.commentsRepository.findOneOrFail(id);
         this.commentsRepository.merge(commentID, data);
   
-        return this.commentsRepository.save(commentID); // UPDATE
+        return await this.commentsRepository.save(commentID); // UPDATE
       } catch (error) {
         // handle error
         throw error;
@@ -47,14 +48,14 @@ export class CommentsService {
       try {
         const commentID = await this.commentsRepository.findOneOrFail(id);
   
-        return this.commentsRepository.remove(commentID); // DELETE
+        return await this.commentsRepository.remove(commentID); // DELETE
       } catch (error) {
         // handle error
         throw error;
       }
     }
   
-    customQueryTest(): any {
-      return this.commentsRepository.createQueryBuilder("comment").select("com_description").where("com_id = :id", { id: 1}).getOne();
+    async customQueryTest(): Promise<any> {
+      return await this.commentsRepository.createQueryBuilder("comment").select("com_description").where("com_id = :id", { id: 1}).getOne();
     }
 }

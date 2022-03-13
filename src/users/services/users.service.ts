@@ -10,11 +10,11 @@ export class UsersService {
     }
 
     async findOne(condition: object): Promise<User> {
-      return this.usersRepository.findOne(condition);
+      return await this.usersRepository.findOne(condition);
     }
   
-    getAll(): Promise<User[]> {
-      return this.usersRepository.find({
+    async getAll(): Promise<User[]> {
+      return await this.usersRepository.find({
         relations: ['myPost']
       }); // SELECT * FROM user JOIN post
     }
@@ -22,6 +22,7 @@ export class UsersService {
     async getOneById(id: number): Promise<User> {
       try {
         const userID = await this.usersRepository.findOneOrFail(id); // SELECT * FROM user WHERE use_id = id;
+        
         return userID;
       } catch (error) {
         // handle error
@@ -29,10 +30,10 @@ export class UsersService {
       }
     }
   
-    createUser(data: object): Promise<User> {
-      const newUser = this.usersRepository.create(data); // const newUser = new User(); newUser.name = name;
+    async createUser(data: object): Promise<User> {
+      const newUser = await this.usersRepository.create(data); // const newUser = new User(); newUser.name = name;
   
-      return this.usersRepository.save(newUser); // INSERT
+      return await this.usersRepository.save(newUser); // INSERT
     }
   
     async updateUser(id: number, data: object): Promise<User> {
@@ -40,7 +41,7 @@ export class UsersService {
         const userID = await this.usersRepository.findOneOrFail(id);
         this.usersRepository.merge(userID, data);
   
-        return this.usersRepository.save(userID); // UPDATE
+        return await this.usersRepository.save(userID); // UPDATE
       } catch (error) {
         // handle error
         throw error;
@@ -51,14 +52,14 @@ export class UsersService {
       try {
         const userID = await this.usersRepository.findOneOrFail(id);
   
-        return this.usersRepository.remove(userID); // DELETE
+        return await this.usersRepository.remove(userID); // DELETE
       } catch (error) {
         // handle error
         throw error;
       }
     }
   
-    customQueryTest(): any {
-      return this.usersRepository.createQueryBuilder("user").select("use_name").where("use_id = :id OR use_name = :name", { id: 1, name: "John" }).getOne();
+    async customQueryTest(): Promise<any> {
+      return await this.usersRepository.createQueryBuilder("user").select("use_name").where("use_id = :id OR use_name = :name", { id: 1, name: "John" }).getOne();
     }
 }
