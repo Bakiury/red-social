@@ -8,6 +8,10 @@ export class UsersService {
     constructor(@InjectRepository(User) private usersRepository: Repository<User>) {
 
     }
+
+    async findOne(condition: object): Promise<User> {
+      return this.usersRepository.findOne(condition);
+    }
   
     getAll(): Promise<User[]> {
       return this.usersRepository.find({
@@ -26,7 +30,6 @@ export class UsersService {
     }
   
     createUser(data: object): Promise<User> {
-      console.log(data);
       const newUser = this.usersRepository.create(data); // const newUser = new User(); newUser.name = name;
   
       return this.usersRepository.save(newUser); // INSERT

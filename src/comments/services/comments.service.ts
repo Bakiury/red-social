@@ -26,7 +26,6 @@ export class CommentsService {
     }
   
     createComment(data: object): Promise<Comment> {
-      console.log(data);
       const newcomment = this.commentsRepository.create(data); // const newcomment = new comment(); newcomment.name = name;
   
       return this.commentsRepository.save(newcomment); // INSERT

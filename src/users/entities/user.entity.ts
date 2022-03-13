@@ -13,7 +13,7 @@ export class User {
     @Column({type: "varchar", length: 30})
     use_last_name: string;
 
-    @Column({type: "varchar", length: 60})
+    @Column({type: "varchar", length: 60, unique: true})
     use_email: string;
 
     @Column({type: "varchar", length: 64})

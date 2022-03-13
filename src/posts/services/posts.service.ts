@@ -26,7 +26,6 @@ export class PostsService {
     }
   
     createPost(data: object): Promise<MyPost> {
-      console.log(data);
       const newPost = this.postsRepository.create(data); // const newPost = new MyPost(); newPost.name = name;
   
       return this.postsRepository.save(newPost); // INSERT
