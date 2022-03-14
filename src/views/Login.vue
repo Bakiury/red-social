@@ -5,7 +5,7 @@
         <div class="user-img">
           <img src="../assets/user.png" />
         </div>
-        <form class="" v-on:submit.prevent="processLogInUser" autocomplete="off">
+        <form class="" v-on:submit.prevent="signInUser" autocomplete="off">
           <div class="form-group" id="user-group">
             <div>
               <i class="fas fa-user"></i>
@@ -13,9 +13,11 @@
             <input
               id="myUser"
               type="text"
-              class="form-control" v-model="user.use_email"
+              class="form-control"
+              v-model="user.use_email"
               placeholder="Email"
               name="username"
+              ref="myUser"
             />
           </div>
           <div class="form-group">
@@ -25,7 +27,8 @@
             <input
               id="myPass"
               type="password"
-              class="form-control" v-model="user.use_password"
+              class="form-control"
+              v-model="user.use_password"
               placeholder="Contraseña"
               name="password"
             />
@@ -39,7 +42,12 @@
             >No tienes una cuenta registrate aqui</router-link
           >
         </div>
-        <div th:if="${param.error}" v-if="msgWrongPass" class="alert alert-danger" role="alert">
+        <div
+          th:if="${param.error}"
+          v-if="msgWrongPass"
+          class="alert alert-danger"
+          role="alert"
+        >
           Credenciales incorrectas.
         </div>
       </div>
@@ -47,9 +55,10 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from "vue";
 import $ from "jquery";
+import axios from "axios";
 
 export default defineComponent({
   name: "Login",
@@ -64,19 +73,62 @@ export default defineComponent({
   },
   components: {},
   methods: {
-    hidenav: () => {
+    cleanFields() {
+      this.user.use_email = "";
+      this.user.use_password = "";
+    },
+    autoFocus() {
+      // Autofocus on input
+      this.$nextTick(function () {
+        this.myUser = "";
+        setTimeout(() => {
+          this.$refs.myUser.focus();
+        }, 2000);
+      });
+    },
+    async signInUser() {
+      try {
+        const user = await axios.post(
+          "http://localhost:3000/users/login",
+          {
+            use_email: this.user.use_email,
+            use_password: this.user.use_password,
+          },
+          { "Content-Type": "application/json", withCredentials: true }
+        );
+
+        if (user.status === 201) {
+          this.$swal({
+            position: "top-end",
+            icon: "success",
+            title: "¡Las credenciales son correctas!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+
+          this.$router.push({ name: "Feed" });
+        }
+      } catch (e) {
+        this.$swal({
+          position: "top-end",
+          icon: "error",
+          title: "Credenciales incorrectas",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.cleanFields();
+        this.autoFocus();
+      }
+    },
+    hideNav: () => {
       let myPath = window.location.pathname.split("/")[1].toLowerCase();
       if (myPath === "login") {
         $("#nav").hide();
-        $(".footer").hide();
       }
     },
-    processLogInUser: () => {
-        return "";
-    }
   },
   created: function () {
-    this.hidenav();
+    this.hideNav();
   },
 });
 </script>
@@ -84,11 +136,11 @@ export default defineComponent({
 <style scoped>
 .all {
   position: absolute;
-  background-image: url('../assets/background.jpg');
+  background-image: url("../assets/background.jpg");
   background-size: cover;
   width: 100%;
   height: 100%;
-  font-family: 'Baloo 2', cursive;
+  font-family: "Baloo 2", cursive;
 }
 
 .main-section {
@@ -100,7 +152,7 @@ export default defineComponent({
 }
 
 .modal-content {
-  background-color: rgba(255, 234, 167, .8);
+  background-color: rgba(255, 234, 167, 0.8);
   padding: 0 56px;
   width: 385px;
   box-shadow: 0px 0px 2px 3px #ffffff;
