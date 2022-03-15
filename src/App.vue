@@ -18,7 +18,7 @@
       >
     </div>
   </div>
-  <router-view />
+  <router-view class="myBody" />
 </template>
 
 <script>
@@ -36,7 +36,7 @@ export default defineComponent({
         const user = await axios.post(
           "http://localhost:3000/users/logout",
           "",
-          { "Content-Type": "application/json", withCredentials: true }
+          { withCredentials: true }
         );
         this.$swal({
           position: "top-end",
@@ -56,12 +56,18 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.myBody {
+  font-family: "Baloo 2", cursive;
+  background: #fd746c;
+  background: -webkit-linear-gradient(to right, #3d3c3c, #141414);
+  background: linear-gradient(to right, #3d3c3c, #141414);
+}
+
 #nav {
   display: flex;
   justify-content: space-between;
   padding: 10px 20px;
   background-color: rgba(255, 234, 167, 1);
-  box-shadow: 0px 1px 5px 0px #333333;
   font-family: "Baloo 2", cursive;
 }
 
@@ -93,7 +99,7 @@ export default defineComponent({
 .navBox {
   display: flex;
   justify-content: space-around;
-  width: 500px;
+  width: 400px;
   font-size: 18px;
   margin-right: 50px;
 }
@@ -119,9 +125,14 @@ export default defineComponent({
   transition: all 0.3s ease;
 }
 
-#signOut:hover {
+#signOut {
   background: #c06060 !important;
+  color: rgba(255, 234, 167, 1) !important;
   cursor: pointer;
+}
+
+#signOut:hover {
+  background: #be4040 !important;
   transition: all 0.3s ease;
 }
 </style>

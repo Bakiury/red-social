@@ -150,7 +150,7 @@ import axios from "axios";
 
 export default defineComponent({
   name: "SignUp",
-  data: function () {
+  data: () => {
     return {
       user: {
         use_name: "",
@@ -233,7 +233,6 @@ export default defineComponent({
   background-image: url("../assets/background.jpg");
   background-size: cover;
   width: 100%;
-  font-family: "Baloo 2", cursive;
 }
 
 .myRegister {

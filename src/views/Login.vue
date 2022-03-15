@@ -94,7 +94,7 @@ export default defineComponent({
             use_email: this.user.use_email,
             use_password: this.user.use_password,
           },
-          { "Content-Type": "application/json", withCredentials: true }
+          { withCredentials: true }
         );
 
         if (user.status === 201) {
@@ -140,7 +140,6 @@ export default defineComponent({
   background-size: cover;
   width: 100%;
   height: 100%;
-  font-family: "Baloo 2", cursive;
 }
 
 .main-section {
