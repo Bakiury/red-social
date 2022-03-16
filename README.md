@@ -1,4 +1,5 @@
 ## Description
+![Image text](https://user-images.githubusercontent.com/52631774/158644650-0ae04239-bc0b-4edf-9684-7bf80447c5ff.png)
 
 Esta es un desarrollo web de una red social básica usando las siguientes tecnologías:
 
@@ -14,6 +15,11 @@ Debidido a que este desarrollo implementa JavaScript como lenguaje de programaci
 **Para la parte del Backend:** Bajar el repositorio de la rama "backend" descargar las dependencias necesarias que ya estan en el archivo "package.json" y correr el servidor de NestJs con "npm run start:dev"
 
 **Para la parte del Frontend:** Bajar el repositorio de la rama "frontend" descargar las dependencias necesarias que ya estan en el archivo "package.json" y correr el servidor de VueJs con "npm run serve"
+
+## Base de datos usada MySql usando Xampp
+
+Se crearon migraciones desde NestJs ejecutando "npm run migration:generate"
+![Image text](https://user-images.githubusercontent.com/52631774/158644077-ed636eba-b14d-4a26-aada-d4f952ea6005.png)
 
 ## EndPoints del API Rest creados
 
