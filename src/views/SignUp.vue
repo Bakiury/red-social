@@ -200,7 +200,7 @@ export default defineComponent({
             use_description: this.user.use_description.trim(),
           });
 
-          if (user.status === 201) {
+          if (user.status === 201 || user.status === 200) {
             this.$swal({
               position: "top-end",
               icon: "success",

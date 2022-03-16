@@ -97,7 +97,7 @@ export default defineComponent({
           { withCredentials: true }
         );
 
-        if (user.status === 201) {
+        if (user.status === 201 || user.status === 200) {
           this.$swal({
             position: "top-end",
             icon: "success",
