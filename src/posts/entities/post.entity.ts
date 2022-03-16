@@ -13,6 +13,12 @@ export class MyPost {
     @Column({type: "varchar", length: 256})
     pos_description: string;
 
+    @Column({type: "varchar", length: 20})
+    pos_title: string;
+
+    @Column({type: "varchar", length: 64})
+    pos_image: string;
+
     @CreateDateColumn({type: "timestamp", name: "created_at", default: () => "CURRENT_TIMESTAMP"})
     created_at: Date;
 
