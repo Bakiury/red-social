@@ -176,28 +176,28 @@ export default defineComponent({
     async createUser() {
       try {
         if (
-          !this.user.use_name ||
-          !this.user.use_last_name ||
-          !this.user.use_email ||
-          !this.user.use_password ||
-          !this.user.use_profile_image ||
-          !this.user.use_birthday ||
-          !this.user.use_description
+          !this.user.use_name.trim() ||
+          !this.user.use_last_name.trim() ||
+          !this.user.use_email.trim() ||
+          !this.user.use_password.trim() ||
+          !this.user.use_profile_image.trim() ||
+          !this.user.use_birthday.trim() ||
+          !this.user.use_description.trim()
         ) {
           this.$swal({
-            icon: "error",
+            icon: "warning",
             title: "Oops...",
             text: "Faltan datos por llenar",
           });
         } else {
           const user = await axios.post("http://localhost:3000/users", {
-            use_name: this.user.use_name,
-            use_last_name: this.user.use_last_name,
-            use_email: this.user.use_email,
-            use_password: this.user.use_password,
-            use_profile_image: this.user.use_profile_image,
-            use_birthday: this.user.use_birthday,
-            use_description: this.user.use_description,
+            use_name: this.user.use_name.trim(),
+            use_last_name: this.user.use_last_name.trim(),
+            use_email: this.user.use_email.trim(),
+            use_password: this.user.use_password.trim(),
+            use_profile_image: this.user.use_profile_image.trim(),
+            use_birthday: this.user.use_birthday.trim(),
+            use_description: this.user.use_description.trim(),
           });
 
           if (user.status === 201) {

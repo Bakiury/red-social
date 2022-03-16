@@ -1,7 +1,8 @@
 <template>
+  <h4>Buscar a alguien</h4>
   <input
     type="text"
-    placeholder="Buscar publicaciones por nombre de usuario"
+    placeholder="Filtrar por el nombre de la persona"
     class="mySearch form-control"
     v-model="text"
     @keyup="procesarInput()"
@@ -52,10 +53,24 @@ export default defineComponent({
 </script>
 
 <style scoped>
+h4 {
+  position: fixed;
+  right: 25px;
+  top: 100px;
+  color: #ffffff;
+  width: 280px;
+  text-align: center;
+}
+
 .mySearch {
-  width: 350px;
-  top: 40px;
+  width: 280px;
+  top: 130px;
+  right: 25px;
   padding-top: 10px;
-  position: absolute;
+  position: fixed;
+  border-radius: 25px;
+  text-align: center;
+  border: 1px dotted #333333;
+  box-shadow: 0px 0px 5px 0px #ffffff;
 }
 </style>

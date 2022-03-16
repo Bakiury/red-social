@@ -69,13 +69,22 @@ export default defineComponent({
   padding: 10px 20px;
   background-color: rgba(255, 234, 167, 1);
   font-family: "Baloo 2", cursive;
+  position: sticky;
+  top: 0;
+  box-shadow: 0px 1px 5px 0px #ffffff;
+  z-index: 1;
 }
 
 .sectionLogo {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  cursor: pointer;
+  cursor: default;
+}
+
+.sectionLogo:hover, #nav a:active {
+  transform: scale(.98);
+  transition: all .3s ease;
 }
 
 .sectionLogo h1 {

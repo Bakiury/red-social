@@ -2,7 +2,7 @@
   <div class="card" style="width: 18rem">
     <div class="cardHeader">
       <img src="../assets/user.png" alt="Imagen del usuario" />
-      <h4>{{ userName }}  {{ userLastName }}</h4>
+      <h3>{{ userData.use_name }} {{ userData.use_last_name }}</h3>
     </div>
     <img
       src="../assets/background.jpg"
@@ -10,12 +10,16 @@
       alt="Imagen del post"
     />
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
+      <h4 class="card-title">
+        <u>{{ postData.pos_title }}</u>
+      </h4>
       <p class="card-text">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
+        {{ postData.pos_description }}
       </p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <hr />
+      <div class="d-flex justify-content-center">
+        <a href="#" class="btn btn-dark">Agregar comentario</a>
+      </div>
     </div>
   </div>
 </template>
@@ -26,8 +30,8 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "Comment",
   props: {
-    userName: String,
-    userLastName: String,
+    userData: Object,
+    postData: Object,
   },
   data: () => {
     return {};
@@ -46,7 +50,7 @@ export default defineComponent({
   width: 50px;
 }
 
-.cardHeader h4 {
+.cardHeader h3 {
   display: flex;
   align-items: center;
   margin-left: 5px;
