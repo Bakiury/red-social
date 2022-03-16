@@ -47,6 +47,18 @@ export class UsersService {
         throw error;
       }
     }
+
+    async updatePass(id: number, newPass: string): Promise<User> {
+      try {
+        const userID = await this.usersRepository.findOneOrFail(id);
+        this.usersRepository.merge(userID, {use_password: newPass});
+  
+        return await this.usersRepository.save(userID); // UPDATE use_password
+      } catch (error) {
+        // handle error
+        throw error;
+      }
+    }
   
     async deleteUser(id: number): Promise<User> {
       try {

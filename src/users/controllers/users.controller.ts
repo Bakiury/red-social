@@ -142,6 +142,24 @@ export class UsersController {
         }
     }
 
+    @Patch('change_password/:id')
+    async updatePassword(@Req() request: Request, @Param('id') id: number, @Body('use_password') use_password: string): Promise<User> {
+        try {
+            const cookie = request.cookies['jwt'];
+            const data = await this.jwtService.verifyAsync(cookie);
+    
+            if (!data) {
+                throw new UnauthorizedException();
+            }
+
+            const hashedPassword = await bcrypt.hash(use_password, 12);
+
+            return await this.usersService.updatePass(id, hashedPassword);
+        } catch (error) {
+            throw new UnauthorizedException();
+        }
+    }
+
     @Delete(':id')
     async delete(@Req() request: Request, @Param('id') id: number): Promise<User> {
         try {
