@@ -58,7 +58,7 @@ export default defineComponent({
 <style scoped>
 .myBody {
   font-family: "Baloo 2", cursive;
-  background: #fd746c;
+  background: #3d3c3c;
   background: -webkit-linear-gradient(to right, #3d3c3c, #141414);
   background: linear-gradient(to right, #3d3c3c, #141414);
 }

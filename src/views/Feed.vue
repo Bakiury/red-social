@@ -263,4 +263,17 @@ export default defineComponent({
   border: 2px solid #333333;
   transition: all 0.5s ease;
 }
+
+.modal-content {
+  width: 99%;
+}
+
+.modal-header, .modal-footer {
+  background: rgba(255, 234, 167, 1) !important;
+}
+
+.modal-body {
+  background: #444444!important;
+  color: #ffffff;
+}
 </style>

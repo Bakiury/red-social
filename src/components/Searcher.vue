@@ -2,9 +2,10 @@
   <h4>Buscar a alguien</h4>
   <input
     type="text"
-    placeholder="Filtrar por el nombre de la persona"
+    placeholder="Buscar por el nombre de la persona"
     class="mySearch form-control"
     v-model="text"
+    title="Puedes buscar por el nombre o apellido del usuario"
     @keyup="procesarInput()"
   />
 </template>
