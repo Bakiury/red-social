@@ -1,73 +1,45 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Esta es un desarrollo web de una red social básica usando las siguientes tecnologías:
 
-## Installation
+**Backend:** NodeJs con el framework NestJs
+**Frontend:** JavaScript y TypeScript con el framework VueJs
 
-```bash
-$ npm install
-```
+**Observaciones:**
+Se crearon dos ramas una para el desarrollo del API Rest en el Backend llamada "backend" y la otra para el desarrollo del Frontend llamada "Frontend".
 
-## Running the app
+Debidido a que este desarrollo implementa JavaScript como lenguaje de programación base.
 
-```bash
-# development
-$ npm run start
+**La instalación local de este proyecto consiste:**
+**Para la parte del Backend:** Bajar el repositorio de la rama "backend" descargar las dependencias necesarias que ya estan en el archivo "package.json" y correr el servidor de NestJs con "npm run start:dev"
 
-# watch mode
-$ npm run start:dev
+**Para la parte del Frontend:** Bajar el repositorio de la rama "frontend" descargar las dependencias necesarias que ya estan en el archivo "package.json" y correr el servidor de VueJs con "npm run serve"
 
-# production mode
-$ npm run start:prod
-```
-
-## Test
+## EndPoints del API Rest creados
 
 ```bash
-# unit tests
-$ npm run test
+**UsersController**
+/users/login                       - (POST)
+/users/auth_user                   - (GET)
+/users/logout                      - (POST)
+/users/all                         - (GET)
+/users/:id                         - (GET)
+/users                             - (POST)
+/users/:id                         - (PATCH)
+/users/change_password/:id         - (PATCH)
+/users/:id                         - (DELETE)
 
-# e2e tests
-$ npm run test:e2e
+**PostsController**
+/posts/all                         - (GET)
+/posts/:id                         - (GET)
+/posts                             - (POST)
+/posts/:id                         - (PATCH)
+/posts/:id                         - (DELETE)
 
-# test coverage
-$ npm run test:cov
+**CommentsController**
+/comments/all                      - (GET)
+/comments/:id                      - (GET)
+/comments                          - (POST)
+/comments/:id                      - (PATCH)
+/comments/:id                      - (DELETE)
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
